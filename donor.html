@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donor Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- FullCalendar -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Donor Dashboard</h1>
+    <a href="login.html" class="back-btn">⬅ Logout</a>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>📢 Feedback Received</h2>
+      <div id="feedbackContainer">No feedback yet.</div>
+    </section>
+
+    <section class="card">
+      <h2>🗓 Integrated Calendar</h2>
+      <div id="donorCalendar"></div>
+    </section>
+  </main>
+
+  <script>
+    // Calendar
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('donorCalendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        height: 500,
+        events: [
+          { title: 'Donation Drive', start: '2025-09-15' },
+          { title: 'Education Aid Event', start: '2025-09-25' }
+        ]
+      });
+      calendar.render();
+    });
+
+    // Feedback Display
+    document.addEventListener("DOMContentLoaded", () => {
+      let feedbackList = JSON.parse(localStorage.getItem("donorFeedback")) || [];
+      const container = document.getElementById("feedbackContainer");
+
+      if (feedbackList.length === 0) {
+        container.innerHTML = "<p>No feedback yet.</p>";
+      } else {
+        container.innerHTML = feedbackList.map(f => `
+          <div class="feedback">
+            <p><strong>${f.donor}</strong> (${f.date})</p>
+            <p>⭐ Rating: ${f.rating || "No rating"}</p>
+            <p>💬 Feedback: ${f.feedback || "No comments"}</p>
+            ${f.fraud ? "<p style='color:red;'>⚠ Fraud Reported!</p>" : ""}
+          </div>
+          <hr>
+        `).join("");
+      }
+    });
+  </script>
+</body>
+</html>

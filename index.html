@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eco Network</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Leaflet CSS & JS for Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: #fffdf8;
+      color: #3e2723;
+    }
+    .hero {
+      text-align: center;
+      padding: 90px 20px;
+      background: linear-gradient(to right, #fdf6ec, #fff8f0);
+    }
+    .hero h1 {
+      font-size: 3.2em;
+      margin-bottom: 10px;
+      color: #2e7d32;
+    }
+    .hero p.tagline {
+      font-size: 1.3em;
+      color: #5d4037;
+      margin-bottom: 25px;
+      font-style: italic;
+    }
+    .hero .btn {
+      padding: 12px 28px;
+      background: #3e2723;
+      color: #fdf6ec;
+      text-decoration: none;
+      border-radius: 8px;
+      margin: 8px;
+      display: inline-block;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .hero .btn:hover {
+      background: #4e342e;
+    }
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 50px 20px;
+    }
+    .feature-card {
+      flex: 1 1 250px;
+      background: #fff8f0;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .feature-card h3 { color: #2e7d32; }
+    .steps {
+      text-align: center;
+      padding: 50px 20px;
+    }
+    .steps h2 { margin-bottom: 25px; color: #2e7d32; }
+    .steps .step { margin: 15px 0; font-size: 1.1em; }
+    .map-section {
+      padding: 50px 20px;
+      background: #fdf6ec;
+    }
+    #map {
+      height: 400px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #3e2723;
+      color: #fdf6ec;
+    }
+  </style>
+</head>
+<body>
+  <!-- HERO -->
+  <section class="hero">
+    <h1>🌍 Eco Network</h1>
+    <p class="tagline">Where Help Meets Hope</p>
+    <a href="login.html" class="btn">Login</a>
+    <a href="signup.html" class="btn">Sign Up</a>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="feature-card">
+      <h3>📌 Live Request Status</h3>
+      <p>Track your requests in real-time and know when help is on the way.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🤝 Volunteer Matching</h3>
+      <p>Connect with volunteers nearby who are ready to support you.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🗓 Integrated Calendar</h3>
+      <p>Never miss events, donation drives, or scheduled support visits.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🗺 Map of Support</h3>
+      <p>View nearby volunteers and community help centers on an interactive map.</p>
+    </div>
+  </section>
+
+  <!-- MAP SECTION -->
+  <section class="map-section">
+    <h2 style="text-align:center; margin-bottom:20px;">Find Volunteers Near You</h2>
+    <div id="map"></div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="steps">
+    <h2>How It Works</h2>
+    <div class="step">1️⃣ Sign Up as a Help-Seeker or Volunteer</div>
+    <div class="step">2️⃣ Submit or Pick Requests</div>
+    <div class="step">3️⃣ Connect, Help, and Grow Together</div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Eco Network | Built with ❤️ at Hackathon</p>
+  </footer>
+
+  <!-- LEAFLET MAP INIT -->
+  <script>
+    // Initialize map (Chennai as default center – change if needed)
+    var map = L.map('map').setView([13.0827, 80.2707], 12);
+
+    // Add tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Demo markers
+    L.marker([13.0827, 80.2707]).addTo(map).bindPopup("📍 You are here (demo)");
+    L.marker([13.05, 80.25]).addTo(map).bindPopup("🤝 Volunteer available here");
+    L.marker([13.1, 80.28]).addTo(map).bindPopup("🏥 Community Help Center");
+  </script>
+</body>
+</html>
+
